@@ -34,11 +34,11 @@ export const register = async (req, res) => {
       ...userData,
       token,
     });
-  } catch (error) {
-    console.log(error),
-      res.status(500).json({
-        message: 'Error saving user: ' + error.message,
-      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: 'Error saving user: ' + error.message,
+    });
   }
 };
 
@@ -48,7 +48,7 @@ export const login = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        message: 'User not found',
+        message: 'Пользователь не найден',
       });
     }
 
@@ -56,7 +56,7 @@ export const login = async (req, res) => {
 
     if (!isValidPass) {
       return res.status(400).json({
-        message: 'Invalid password or email',
+        message: 'Неверный логин или пароль',
       });
     }
     const token = jwt.sign(
@@ -68,16 +68,17 @@ export const login = async (req, res) => {
         expiresIn: '30d',
       },
     );
+
     const { passwordHash, ...userData } = user._doc;
 
     res.json({
-      success: true,
       ...userData,
       token,
     });
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     res.status(500).json({
-      message: 'Error saving user: ' + error.message,
+      message: 'Не удалось авторизоваться',
     });
   }
 };
