@@ -22,10 +22,10 @@ export const getAll = async (req, res) => {
   try {
     const posts = await PostModel.find().populate('user').exec();
     res.json(posts);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
-      message: 'Не удалось получить статьи',
+      message: 'Error while fetching posts',
     });
   }
 };
@@ -79,27 +79,24 @@ export const remove = async (req, res) => {
       },
       (err, doc) => {
         if (err) {
-          console.log(err);
           return res.status(500).json({
-            message: 'Не удалось удалить статью',
+            message: 'Error while removing post',
           });
         }
-
         if (!doc) {
           return res.status(404).json({
-            message: 'Статья не найдена',
+            message: 'Cannot find post',
           });
         }
-
         res.json({
           success: true,
         });
       },
     );
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
-      message: 'Не удалось получить статьи',
+      message: 'Error while fetching posts',
     });
   }
 };
@@ -117,10 +114,10 @@ export const create = async (req, res) => {
     const post = await doc.save();
 
     res.json(post);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
-      message: 'Не удалось создать статью',
+      message: 'Error saving post',
     });
   }
 };
@@ -145,10 +142,10 @@ export const update = async (req, res) => {
     res.json({
       success: true,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
-      message: 'Не удалось обновить статью',
+      message: 'Error while updating posts',
     });
   }
 };

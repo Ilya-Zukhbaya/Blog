@@ -1,4 +1,3 @@
-import { validationResult } from 'express-validator';
 import UserModel from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -37,7 +36,7 @@ export const register = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: 'Error saving user: ' + error.message,
+      message: 'Error saving user: ' + err.message,
     });
   }
 };

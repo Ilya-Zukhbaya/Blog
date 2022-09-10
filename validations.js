@@ -6,15 +6,15 @@ export const loginValidation = [
 ];
 
 export const registerValidation = [
-  body('email', 'Неверный формат почты').isEmail(),
-  body('password', 'Пароль должен быть минимум 5 символов').isLength({ min: 5 }),
-  body('fullName', 'Укажите имя').isLength({ min: 3 }),
-  body('avatarUrl', 'Неверная ссылка на аватарку').optional().isURL(),
+  body('email').isEmail(),
+  body('password').isLength({ min: 5 }),
+  body('fullName').isLength({ min: 3 }),
+  body('avatarUrl').optional().isURL(),
 ];
 
 export const postCreateValidation = [
-  body('title', 'Введите заголовок статьи').isLength({ min: 3 }).isString(),
-  body('text', 'Введите текст статьи').isLength({ min: 3 }).isString(),
-  body('tags', 'Неверный формат тэгов').optional().isString(),
-  body('imageUrl', 'Неверная ссылка на изображение').optional().isString(),
+  body('title', 'Please enter article title').isLength({ min: 3 }).isString(),
+  body('text', 'Please enter article text').isLength({ min: 10 }).isString(),
+  body('tags', 'Incorrect article tags').optional().isString(),
+  body('imageUrl', 'Incorrect image url').optional().isString(),
 ];
